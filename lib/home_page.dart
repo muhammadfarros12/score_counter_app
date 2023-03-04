@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'controller/counter_controller.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends GetView<CounterController> {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Get.put(CounterController());
     return Scaffold(
       appBar: AppBar(title: const Text("Score Counter App"),),
       body: Center(
@@ -34,7 +37,8 @@ class HomePage extends StatelessWidget {
                     color: Colors.blue,
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: const Center(child: Text("0", style: TextStyle(fontSize: 80, color: Colors.white),)),
+                  child: Center(child: Obx
+                  (() => Text("${controller.countA}", style: const TextStyle(fontSize: 80, color: Colors.white),))),
                 ),
                 Container(
                   width: 150,
@@ -43,7 +47,7 @@ class HomePage extends StatelessWidget {
                     color: Colors.amber,
                     borderRadius: BorderRadius.circular(10)
                   ),
-                  child: const Center(child: Text("0", style: TextStyle(fontSize: 80, color: Colors.white),)),
+                  child: Center(child: Obx(() => Text("${controller.countB}", style: const TextStyle(fontSize: 80, color: Colors.white),))),
                 ),
               ],
             ),
@@ -52,10 +56,10 @@ class HomePage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                ElevatedButton(onPressed: (){}, style: ElevatedButton.styleFrom(
+                ElevatedButton(onPressed: () => controller.increamentA(), style: ElevatedButton.styleFrom(
                   fixedSize: const Size(150, 30)
                 ), child: const Text("+1"),),
-                ElevatedButton(onPressed: (){}, style: ElevatedButton.styleFrom(
+                ElevatedButton(onPressed: () => controller.increamentB(), style: ElevatedButton.styleFrom(
                   fixedSize: const Size(150, 30),
                   backgroundColor: Colors.amber
                 ), child: const Text("+1"),),
@@ -65,10 +69,14 @@ class HomePage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                ElevatedButton(onPressed: (){}, style: ElevatedButton.styleFrom(
+                ElevatedButton(onPressed: (){
+                  controller.decreamentA();
+                }, style: ElevatedButton.styleFrom(
                   fixedSize: const Size(150, 30)
                 ), child: const Text("-1"),),
-                ElevatedButton(onPressed: (){}, style: ElevatedButton.styleFrom(
+                ElevatedButton(onPressed: (){
+                  controller.decreamentB();
+                }, style: ElevatedButton.styleFrom(
                   fixedSize: const Size(150, 30),
                   backgroundColor: Colors.amber
                 ), child: const Text("-1"),),
@@ -78,7 +86,7 @@ class HomePage extends StatelessWidget {
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 22),
               width: double.infinity,
-              child: ElevatedButton(onPressed: (){}, style: ElevatedButton.styleFrom(backgroundColor: Colors.red), child: const Text("Reset"),))
+              child: ElevatedButton(onPressed: () => controller.reset(), style: ElevatedButton.styleFrom(backgroundColor: Colors.red), child: const Text("Reset"),))
           ],
         )
       ),
