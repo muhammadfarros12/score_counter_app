@@ -1,7 +1,47 @@
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+
+  int counterA = 0;
+  int counterB = 0;
+
+  increamentA(){
+    setState(() {
+      counterA++;
+    });
+  }
+  increamentB(){
+    setState(() {
+      counterB++;
+    });
+  }
+
+  decreamentA(){
+    setState(() {
+      counterA--;
+    });
+  }
+  decreamentB(){
+    setState(() {
+      counterB--;
+    });
+  }
+
+  reset(){
+    setState(() {
+      counterA = 0;
+      counterB = 0;
+    });
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +74,7 @@ class HomePage extends StatelessWidget {
                     color: Colors.blue,
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: const Center(child: Text("0", style: TextStyle(fontSize: 80, color: Colors.white),)),
+                  child: Center(child: Text("$counterA", style: const TextStyle(fontSize: 80, color: Colors.white),)),
                 ),
                 Container(
                   width: 150,
@@ -43,7 +83,7 @@ class HomePage extends StatelessWidget {
                     color: Colors.amber,
                     borderRadius: BorderRadius.circular(10)
                   ),
-                  child: const Center(child: Text("0", style: TextStyle(fontSize: 80, color: Colors.white),)),
+                  child: Center(child: Text("$counterB", style: const TextStyle(fontSize: 80, color: Colors.white),)),
                 ),
               ],
             ),
@@ -52,10 +92,10 @@ class HomePage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                ElevatedButton(onPressed: (){}, style: ElevatedButton.styleFrom(
+                ElevatedButton(onPressed: increamentA, style: ElevatedButton.styleFrom(
                   fixedSize: const Size(150, 30)
                 ), child: const Text("+1"),),
-                ElevatedButton(onPressed: (){}, style: ElevatedButton.styleFrom(
+                ElevatedButton(onPressed: increamentB, style: ElevatedButton.styleFrom(
                   fixedSize: const Size(150, 30),
                   backgroundColor: Colors.amber
                 ), child: const Text("+1"),),
@@ -65,10 +105,10 @@ class HomePage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                ElevatedButton(onPressed: (){}, style: ElevatedButton.styleFrom(
+                ElevatedButton(onPressed: decreamentA, style: ElevatedButton.styleFrom(
                   fixedSize: const Size(150, 30)
                 ), child: const Text("-1"),),
-                ElevatedButton(onPressed: (){}, style: ElevatedButton.styleFrom(
+                ElevatedButton(onPressed: decreamentB, style: ElevatedButton.styleFrom(
                   fixedSize: const Size(150, 30),
                   backgroundColor: Colors.amber
                 ), child: const Text("-1"),),
@@ -78,7 +118,7 @@ class HomePage extends StatelessWidget {
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 22),
               width: double.infinity,
-              child: ElevatedButton(onPressed: (){}, style: ElevatedButton.styleFrom(backgroundColor: Colors.red), child: const Text("Reset"),))
+              child: ElevatedButton(onPressed: reset, style: ElevatedButton.styleFrom(backgroundColor: Colors.red), child: const Text("Reset"),))
           ],
         )
       ),
