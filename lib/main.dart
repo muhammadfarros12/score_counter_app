@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:score_counter_app/home_page.dart';
+import 'package:score_counter_app/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(
+    providers: [ChangeNotifierProvider(create: (_) => CounterProvider())],
+    child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
